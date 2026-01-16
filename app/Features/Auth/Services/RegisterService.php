@@ -6,7 +6,6 @@ use App\Features\Infrastructure\Persistence\Eloquent\UserMajorRepository;
 use App\Features\Infrastructure\Persistence\Eloquent\MajorRepository;
 use App\Features\Auth\DTOs\RegisterDTO;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 
 class RegisterService
 {
@@ -46,7 +45,7 @@ class RegisterService
                 'student_code' => $studentCode,
                 'role_id' => 2, // role_id 2 là sinh viên
                 'full_name' => $dto->full_name,
-                'password' => $dto->password,
+                'password' => Hash::make($dto->password),
             ]);
             // Tạo bảng user_major nếu có mã ngành
             if ($majorCode) {

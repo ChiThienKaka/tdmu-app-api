@@ -11,7 +11,7 @@ class TokenResource extends JsonResource
     {
         return [
             'access_token' => $this['access_token'],
-            'token_type' => $this['token_type'] ?? 'Bearer',
+            // 'token_type' => $this['token_type'] ?? 'Bearer',
             'expires_in' => $this['expires_in'] ?? null,
             'user' => new AuthResource($this['user']),
         ];

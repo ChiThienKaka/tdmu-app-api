@@ -4,11 +4,10 @@ namespace App\Features\Auth\Services;
 
 use App\Features\Auth\DTOs\GoogleLoginDTO;
 use App\Features\Auth\DTOs\LoginDTO;
-use App\Features\Auth\DTOs\RegisterDTO;
 use App\Features\Auth\Repositories\AuthRepository;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use PHPOpenSourceSaver\JwtAuth\Facades\JwtAuth;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthService
 {
