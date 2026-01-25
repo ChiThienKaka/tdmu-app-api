@@ -64,3 +64,28 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Setup Dự án 
+php artisan key:generate
+php artisan migrate:refresh --seed 
+
+## clear cấu hình 
+php artisan optimize:clear
+
+## Rollback
+N = số batch rollback, không phải số migration.
+php artisan migrate:rollback --step=N
+## Rollback theo batch
+php artisan migrate:rollback --batch=2
+Rollback TOÀN BỘ migration thuộc batch số 2
+
+## Tạo migration
+php artisan make:migration create_posts_table
+
+## Cài đặt socket 
+composer require laravel/reverb
+php artisan reverb:install
+
+## Mở “cửa an toàn” cho file public cập nhật khi dự án bị thay đổi
+php artisan storage:link
+public/storage/avatar.png  → storage/app/public/avatar.png

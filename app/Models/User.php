@@ -31,6 +31,10 @@ class User extends Authenticatable implements JWTSubject
         'is_verified'   => 'boolean',
         'date_of_birth'=> 'date',
     ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
     /**
      * Required by JWTSubject
      */
