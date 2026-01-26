@@ -89,3 +89,5 @@ php artisan reverb:install
 ## Mở “cửa an toàn” cho file public cập nhật khi dự án bị thay đổi
 php artisan storage:link
 public/storage/avatar.png  → storage/app/public/avatar.png
+## Bật cors trong laravel 11
+php artisan config:publish cors
