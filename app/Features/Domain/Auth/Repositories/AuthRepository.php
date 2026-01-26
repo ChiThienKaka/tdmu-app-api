@@ -9,7 +9,6 @@ class AuthRepository
     public function __construct(private User $user)
     {
     }
-
     public function findByEmail(string $email): ?User
     {
         return $this->user->where('email', $email)->first();

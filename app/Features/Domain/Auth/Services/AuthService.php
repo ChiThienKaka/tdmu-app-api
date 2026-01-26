@@ -41,8 +41,13 @@ class AuthService
      */
     public function loginWithGoogle(GoogleLoginDTO $dto): array
     {
+        // 1. Tìm theo google_id
         $user = $this->authRepository->findByGoogleId($dto->google_id);
 
+        // 2. Nếu chưa có -> tìm theo email
+        if (!$user) {
+            $user = $this->authRepository->findByEmail($dto->email);
+        }
         if (!$user) {
             // Tạo user mới nếu không tồn tại
             $user = $this->authRepository->create([
@@ -52,6 +57,7 @@ class AuthService
                 'avatar' => $dto->picture,
                 'email_verified_at' => now(),
                 'password' => Hash::make(bin2hex(random_bytes(32))), // Random password
+                'role_id' => 2, // tối fix sau
             ]);
         } else {
             // Cập nhật thông tin nếu đã tồn tại
@@ -73,9 +79,15 @@ class AuthService
     /**
      * Lấy thông tin user từ token
      */
-    public function me(): ?User
+    public function me():array
     {
-        return auth('api')->user();
+       $user = auth('api')->user();
+        // check role là sinh viên
+        if($user->role_id === 2){
+            $user->load('majors.faculty');
+            return [$user];
+        };
+        return [$user];
     }
 
     /**

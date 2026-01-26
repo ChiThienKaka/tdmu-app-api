@@ -85,7 +85,7 @@ class AuthController extends Controller
         }
 
         return response()->json(
-            new AuthResource($user),
+            $user,
             200
         );
     }
