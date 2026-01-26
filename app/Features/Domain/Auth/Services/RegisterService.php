@@ -46,6 +46,9 @@ class RegisterService
                 'role_id' => 2, // role_id 2 là sinh viên
                 'full_name' => $dto->full_name,
                 'password' => Hash::make($dto->password),
+                //register google
+                'picture'=> $dto->picture,
+                'google_id'=> $dto->google_id
             ]);
             // Tạo bảng user_major nếu có mã ngành
             if ($majorCode) {
@@ -69,6 +72,9 @@ class RegisterService
                 'role_id' => 3, // role_id 3 là khách
                 'full_name' => $dto->full_name,
                 'password' => Hash::make($dto->password),
+                //register google
+                'picture'=> $dto->picture,
+                'google_id'=> $dto->google_id
             ]);
             return [
                 'success' => true,

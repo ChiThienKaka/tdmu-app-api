@@ -26,14 +26,20 @@ class CreatePostService
             throw new \Exception('User must be authenticated to create a post.');
         }
         //load lại thông tin user kèm major sử dụng realtions
-        $user->load('majors.faculty');
-        $major = $user->majors->first();
-        $faculty = $major->faculty;
+        if($user->role_id === 2){
+            $user->load('majors.faculty');
+            $major = $user->majors->first();
+            $faculty = $major->faculty;
+        }else{
+            $major = null;
+            $faculty = null;
+        }
+       
         // Tạo bài đăng
         $post = $this->postRepository->create([
             'user_id' => $user->user_id,
-            'major_id' => $major->major_id,
-            'faculty_id' => $faculty->faculty_id,
+            'major_id' => $major?->major_id,
+            'faculty_id' => $faculty?->faculty_id,
             'content' => $dto->content,
         ]);
         if(empty($medias)) {

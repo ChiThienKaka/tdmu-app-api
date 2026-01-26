@@ -9,6 +9,8 @@ class RegisterDTO
         public string $email,
         public string $password,
         public ?string $google_id = null,
+        //google register
+        public ?string $picture = null
     ) {}
 
     public static function fromArray(array $data): self
@@ -18,6 +20,7 @@ class RegisterDTO
             email: $data['email'],
             password: $data['password'],
             google_id: $data['google_id'] ?? null,
+            picture: $data['picture']??null,
         );
     }
 
@@ -28,6 +31,7 @@ class RegisterDTO
             'email' => $this->email,
             'password' => $this->password,
             'google_id' => $this->google_id,
+            'picture' => $this->picture
         ];
     }
 }

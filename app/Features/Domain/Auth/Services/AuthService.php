@@ -8,10 +8,12 @@ use App\Features\Domain\Auth\Repositories\AuthRepository;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use App\Features\Domain\Auth\Services\RegisterService;
+use App\Features\Domain\Auth\DTOs\RegisterDTO;
 
 class AuthService
 {
-    public function __construct(private AuthRepository $authRepository)
+    public function __construct(private AuthRepository $authRepository, private RegisterService $registerService)
     {
     }
 
@@ -43,29 +45,26 @@ class AuthService
     {
         // 1. Tìm theo google_id
         $user = $this->authRepository->findByGoogleId($dto->google_id);
-
         // 2. Nếu chưa có -> tìm theo email
         if (!$user) {
             $user = $this->authRepository->findByEmail($dto->email);
+            if ($user) {
+                // 2a. Email tồn tại (user đăng ký thường) -> gán google_id
+                $this->authRepository->update($user, [
+                    'google_id' => $dto->google_id,
+                ]);
+            }else{
+                // 3. Chưa có gì -> tạo user mới
+                $registerLogin = new RegisterDTO(
+                    full_name : $dto->name,
+                    email : $dto->email,
+                    password : bin2hex(random_bytes(32)),// 64 ký tự random,
+                    google_id : $dto->google_id,
+                    picture : $dto->picture,
+                );
+                $this->registerService->createStudentProfile($registerLogin);
+            }
         }
-        if (!$user) {
-            // Tạo user mới nếu không tồn tại
-            $user = $this->authRepository->create([
-                'name' => $dto->name,
-                'email' => $dto->email,
-                'google_id' => $dto->google_id,
-                'avatar' => $dto->picture,
-                'email_verified_at' => now(),
-                'password' => Hash::make(bin2hex(random_bytes(32))), // Random password
-                'role_id' => 2, // tối fix sau
-            ]);
-        } else {
-            // Cập nhật thông tin nếu đã tồn tại
-            $this->authRepository->update($user, [
-                'avatar' => $dto->picture,
-            ]);
-        }
-
         $token = JwtAuth::fromUser($user);
 
         return [
