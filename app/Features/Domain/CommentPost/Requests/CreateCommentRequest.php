@@ -12,10 +12,9 @@ class CreateCommentRequest extends FormRequest{
     public function rules(): array
     {
         return [
-            'post_id' => ['required', 'integer', 'exists:posts,id'],
-            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'post_id' => ['required', 'integer', 'exists:posts,post_id'],
             'content' => ['required', 'string', 'max:1000'],
-            'parent_comment_id' => ['nullable', 'integer', 'exists:comments,id'],
+            'parent_comment_id' => ['nullable', 'integer', 'exists:comments,comment_id'],
         ];
     }
 
@@ -25,9 +24,6 @@ class CreateCommentRequest extends FormRequest{
             'post_id.required' => 'Post ID là bắt buộc',
             'post_id.integer' => 'Post ID phải là số nguyên',
             'post_id.exists' => 'Post không tồn tại',
-            'user_id.required' => 'User ID là bắt buộc',
-            'user_id.integer' => 'User ID phải là số nguyên',
-            'user_id.exists' => 'User không tồn tại',
             'content.required' => 'Nội dung bình luận là bắt buộc',
             'content.string' => 'Nội dung bình luận phải là chuỗi ký tự',
             'content.max' => 'Nội dung bình luận không được vượt quá 1000 ký tự',

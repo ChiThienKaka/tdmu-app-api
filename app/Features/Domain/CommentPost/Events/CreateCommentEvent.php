@@ -1,14 +1,14 @@
 <?php
 namespace App\Features\Domain\CommentPost\Events;
 
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\Channel;
 use App\Models\Comment;
 
 
-class CreateCommentEvent implements ShouldBroadcast
+class CreateCommentEvent implements ShouldBroadcastNow
 {
     use InteractsWithSockets, SerializesModels;
     public Comment $comment;
@@ -32,12 +32,12 @@ class CreateCommentEvent implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'id'        => $this->comment->id,
-            'content'   => $this->comment->content,
-            'user'      => [
-                'id'   => $this->comment->user->id,
-                'name' => $this->comment->user->name,
-            ],
+            'comment_id'        => $this->comment->comment_id,
+            // 'content'   => $this->comment->content,
+            // 'user'      => [
+            //     'id'   => $this->comment->user->id,
+            //     'name' => $this->comment->user->name,
+            // ],
             'created_at' => $this->comment->created_at->toDateTimeString(),
         ];
     }

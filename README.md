@@ -85,9 +85,11 @@ php artisan make:migration create_posts_table
 ## Cài đặt socket 
 composer require laravel/reverb
 php artisan reverb:install
-
+php artisan reverb:start
+ws://localhost:8080/app/YOUR_KEY test trên postman
 ## Mở “cửa an toàn” cho file public cập nhật khi dự án bị thay đổi
 php artisan storage:link
 public/storage/avatar.png  → storage/app/public/avatar.png
 ## Bật cors trong laravel 11
 php artisan config:publish cors
+
