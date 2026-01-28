@@ -18,12 +18,12 @@ class CommentPostRepository
         return $comments;
     }
     //get reply comment parent
-    public function getReplyComment(int $comment_id)
+    public function getReplyComment(int $comment_id, int $perPage = 5)
     {
         $replies = $this->comment->where('parent_comment_id', $comment_id)
         ->with('user')
         ->orderBy('created_at', 'asc')
-        ->get();
+        ->paginate($perPage);
         return $replies;
     }
 }

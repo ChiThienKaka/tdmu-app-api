@@ -8,6 +8,7 @@ use App\Features\Domain\CommentPost\DTOs\CreateCommentDTO;
 use App\Features\Domain\CommentPost\Services\StoreCommentService;
 use App\Features\Domain\CommentPost\Requests\GetCommentParentRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Features\Domain\CommentPost\Resources\CommentParentResource;
 
 class CommentController extends Controller
 {
@@ -34,7 +35,14 @@ class CommentController extends Controller
         $postId = $data['post_id'];
         $perPage = $data['per_page'] ?? 10;
         $result = $this->storeCommentService->getParents($postId, $perPage);
-        return response()->json($result);
+        return response()->json(
+            [
+                'data' => CommentParentResource::collection($result),
+                'current_page' => $result->currentPage(),
+                'total' => $result->total(),
+            ],
+            200
+        );
     }
     //lấy reply của comment cha
     public function getReplyComment(FormRequest $request)
@@ -45,6 +53,13 @@ class CommentController extends Controller
         ]);
         $commentId = $data['comment_id'];
         $result = $this->storeCommentService->getReplyParent($commentId);
-        return response()->json($result);
+        return response()->json(
+            [
+                'data' => CommentParentResource::collection($result),
+                'current_page' => $result->currentPage(),
+                'total' => $result->total(),
+            ],
+            200
+        );
     }
 }
