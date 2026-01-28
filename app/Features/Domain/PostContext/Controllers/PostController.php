@@ -7,6 +7,8 @@ use App\Features\Domain\PostContext\Requests\CreatePostRequest;
 use Illuminate\Support\Facades\Auth;
 use App\FEatures\Domain\PostContext\Services\GetPostService;
 use Illuminate\Http\Request;
+use App\Features\Domain\PostContext\Resources\PostContextResource;
+use App\Features\Domain\PostContext\Resources\StorePostResource;
 
 class PostController extends Controller
 {
@@ -24,7 +26,10 @@ class PostController extends Controller
         $dtoPost = CreatePostDTO::fromArray($request->validated());
         $medias = $request->file('images', []);
         $result = $this->createPostService->createPost($dtoPost, $medias, $user);
-        return response()->json($result, 201);
+        return response()->json(
+            new PostContextResource($result),
+            201
+        );
     }
 
     // Lấy danh sách bài Post theo user đăng nhập
@@ -34,7 +39,10 @@ class PostController extends Controller
         $user = Auth::user();
         // Sử dụng dịch vụ để lấy bài viết
         $result = $this->getPostService->getPosts($user, 10, $cursor); 
-        return response()->json($result, 200);
+        return response()->json(
+            StorePostResource::collection($result),
+            200
+        );
     }
 
 }

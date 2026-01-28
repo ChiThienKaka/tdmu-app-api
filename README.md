@@ -70,9 +70,11 @@ php artisan key:generate
 php artisan migrate:refresh --seed 
 
 ## clear cấu hình 
-php artisan optimize:clear
+php artisan config:clear && php artisan config:cache
+php artisan optimize:clear (lệnh clear tổng)
 
 ## Rollback
+php artisan migrate:status
 N = số batch rollback, không phải số migration.
 php artisan migrate:rollback --step=N
 ## Rollback theo batch

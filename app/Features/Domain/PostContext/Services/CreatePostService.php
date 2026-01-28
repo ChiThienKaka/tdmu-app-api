@@ -20,7 +20,7 @@ class CreatePostService
         $this->postMediaRepository = $postMediaRepository;
         $this->imageStorageService = $imageStorageService;
     }
-    public function createPost(CreatePostDTO $dto, array $medias , User $user): array
+    public function createPost(CreatePostDTO $dto, array $medias , User $user)
     {
         if ($user === null) {
             throw new \Exception('User must be authenticated to create a post.');
@@ -43,7 +43,7 @@ class CreatePostService
             'content' => $dto->content,
         ]);
         if(empty($medias)) {
-            return ['post' => $post];
+            return $post;
         }
         $mediaRecords = [];
         // Tạo media cho bài đăng
@@ -58,9 +58,8 @@ class CreatePostService
                 'media_order'=> $index,
             ]);
         }
-        return [
-            'post' => $post,
-            'media' => $mediaRecords,
-        ];
+        // KHÔNG CÓ query nào phát sinh thêm
+        $result = $post->setRelation('media', collect($mediaRecords));
+        return $result;
     }
 }
