@@ -78,15 +78,15 @@ class AuthService
     /**
      * Lấy thông tin user từ token
      */
-    public function me():array
+    public function me()
     {
        $user = auth('api')->user();
         // check role là sinh viên
         if($user->role_id === 2){
             $user->load('majors.faculty');
-            return [$user];
+            return $user;
         };
-        return [$user];
+        return $user;
     }
 
     /**

@@ -14,6 +14,7 @@ use App\Features\Domain\Auth\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Features\Domain\Auth\Services\RegisterService;
+use App\Features\Domain\Auth\Resources\UserInfoResource;
 
 class AuthController extends Controller
 {
@@ -85,7 +86,7 @@ class AuthController extends Controller
         }
 
         return response()->json(
-            $user,
+            new UserInfoResource($user),
             200
         );
     }
