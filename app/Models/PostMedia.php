@@ -24,6 +24,10 @@ class PostMedia extends Model
     // thêm thuộc tính url ảo để truy cập đường dẫn đầy đủ của media
     public function getUrlAttribute(): string
     {
+        // Nếu media_url đã là full url (server)
+        if ($this->disk === 'server') {
+            return $this->media_url;
+        }
         /** @var FilesystemAdapter $disk */
         $disk = Storage::disk($this->disk);
 

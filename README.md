@@ -68,6 +68,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Setup Dự án 
 php artisan key:generate
 php artisan migrate:refresh --seed 
+php artisan db:seed --class=UserSeeder
+
 
 ## clear cấu hình 
 php artisan config:clear && php artisan config:cache
@@ -94,4 +96,8 @@ php artisan storage:link
 public/storage/avatar.png  → storage/app/public/avatar.png
 ## Bật cors trong laravel 11
 php artisan config:publish cors
+
+## source ảnh craw
+https://dienmaycholon.com/kinh-nghiem-mua-sam/avatar-dep
+https://maubanhkem.com/anh-hoc-tap-chill/
 

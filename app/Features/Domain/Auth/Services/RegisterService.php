@@ -96,7 +96,7 @@ class RegisterService
     // kiểm tra mssv thuộc ngành nào
     function extractMajorCode(string $studentCode): ?string
     {
-        if (strlen($studentCode) < 10) {
+        if (strlen($studentCode) !== 13) {
             return null;
         }
         ///format xxx480201xxxx

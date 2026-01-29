@@ -33,7 +33,7 @@ class CreateCommentEvent implements ShouldBroadcastNow
     {
         return [
             'comment_id'        => $this->comment->comment_id,
-            // 'content'   => $this->comment->content,
+            'content'   => $this->comment->content,
             // 'user'      => [
             //     'id'   => $this->comment->user->id,
             //     'name' => $this->comment->user->name,

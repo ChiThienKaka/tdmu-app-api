@@ -23,7 +23,7 @@ class CreateCommentService
             'parent_comment_id'=>$dto->parent_comment_id,
         ]);
         // Fire the event to broadcast the new comment
-        //broadcast(new CreateCommentEvent($comment));//->toOthers();
+        // broadcast(new CreateCommentEvent($comment));//->toOthers();
         return $comment;
     }
 }
