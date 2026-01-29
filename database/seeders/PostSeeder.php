@@ -18,6 +18,7 @@ class PostSeeder extends Seeder
     {
         $contents = collect(require database_path('seeders\seed-data\post\content.php'));
         $content_images = collect(require database_path('seeders\seed-data\post\content_image.php'));
+        $comment_post = collect(require database_path('seeders\seed-data\post\comment.php'));
         $users = User::with('majors')->get();
 
         foreach ($users as $user) {
@@ -45,6 +46,26 @@ class PostSeeder extends Seeder
                     'created_at'=>now(),
                     'updated_at'=>now(),
                 ]);
+                // tạo comment cha
+                foreach($comment_post as $comment){
+                    $user_comment = $users->random();
+                    $parentComment = $post->comment()->create([
+                        'user_id' => $user_comment->user_id,
+                        'content' => $comment['parent']
+                    ]);
+                    // Lấy id comment cha vừa tạo
+                    $parentId = $parentComment->comment_id;
+
+                    //Tạo comment con (reply)
+                    foreach ($comment['children'] as $child) {
+                        $user_child = $users->random();
+                        $post->comment()->create([
+                            'user_id' => $user_child->user_id,
+                            'content' => $child,
+                            'parent_comment_id' => $parentId, // gán cha
+                        ]);
+                    }
+                }
             }
         }
     }

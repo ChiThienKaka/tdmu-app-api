@@ -27,5 +27,9 @@ class Post extends Model
     {
         return $this->hasMany(PostReaction::class, 'post_id');
     }
+     public function comment()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'post_id');
+    }
 
 }
