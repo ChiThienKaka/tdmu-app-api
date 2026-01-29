@@ -6,6 +6,7 @@ use App\Features\Infrastructure\Persistence\Auth\UserMajorRepository;
 use App\Features\Infrastructure\Persistence\Auth\MajorRepository;
 use App\Features\Domain\Auth\DTOs\RegisterDTO;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class RegisterService
 {
@@ -23,7 +24,7 @@ class RegisterService
         $this->majorRepository = $majorRepository;
     }
 
-    public function createStudentProfile(RegisterDTO $dto): ?array
+    public function createStudentProfile(RegisterDTO $dto): ?User
     {
         $email = $dto->email;
 
@@ -47,7 +48,7 @@ class RegisterService
                 'full_name' => $dto->full_name,
                 'password' => Hash::make($dto->password),
                 //register google
-                'picture'=> $dto->picture,
+                'avatar_url'=> $dto->picture,
                 'google_id'=> $dto->google_id
             ]);
             // Tạo bảng user_major nếu có mã ngành
@@ -61,10 +62,7 @@ class RegisterService
                     'major_id' => $major->major_id
                 ]);
             }
-            return [
-                'success' => true,
-                'user' => $user,
-            ];
+            return $user;
         }else{
             // Tạo bảng user cho người dùng không phải sinh viên
             $user = $this->userRepository->create([
@@ -73,13 +71,10 @@ class RegisterService
                 'full_name' => $dto->full_name,
                 'password' => Hash::make($dto->password),
                 //register google
-                'picture'=> $dto->picture,
+                'avatar_url'=> $dto->picture,
                 'google_id'=> $dto->google_id
             ]);
-            return [
-                'success' => true,
-                'user' => $user,
-            ];
+            return $user;
         }
 
         return null;

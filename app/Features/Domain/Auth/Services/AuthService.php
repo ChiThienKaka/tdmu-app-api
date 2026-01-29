@@ -62,7 +62,7 @@ class AuthService
                     google_id : $dto->google_id,
                     picture : $dto->picture,
                 );
-                $this->registerService->createStudentProfile($registerLogin);
+                $user = $this->registerService->createStudentProfile($registerLogin);
             }
         }
         $token = JwtAuth::fromUser($user);

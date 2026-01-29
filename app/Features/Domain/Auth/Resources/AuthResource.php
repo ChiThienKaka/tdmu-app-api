@@ -11,10 +11,10 @@ class AuthResource extends JsonResource
     {
         return [
             'user_id' => $this->user_id,
-            'name' => $this->name,
+            'full_name' => $this->full_name,
             'email' => $this->email,
             'google_id' => $this->google_id,
-            'avatar' => $this->avatar,
+            'avatar_url' => $this->avatar_url,
             'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at?->toIso8601String(),
             'updated_at' => $this->updated_at?->toIso8601String(),
