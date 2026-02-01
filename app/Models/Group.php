@@ -62,7 +62,7 @@ class Group extends Model
             'group_members',
             'group_id',
             'user_id'
-        )->withPivot('member_role', 'joined_at');
+        )->withPivot('member_role');
     }
 
     // Tin nhắn trong group

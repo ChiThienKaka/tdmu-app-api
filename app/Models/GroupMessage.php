@@ -63,4 +63,13 @@ class GroupMessage extends Model
             'message_id'
         );
     }
+    // Các media đính kèm của tin nhắn
+    public function medias(): HasMany
+    {
+        return $this->hasMany(
+            GroupMessageMedia::class,
+            'message_id',
+            'message_id'
+        );
+    }
 }

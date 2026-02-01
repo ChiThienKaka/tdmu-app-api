@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\GroupMember;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,5 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MajorSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(PostSeeder::class);
+        $this->call(GroupSeeder::class);
+        $this->call(GroupMemberSeeder::class);
+        $this->call(GroupMessageSeeder::class);
     }
 }

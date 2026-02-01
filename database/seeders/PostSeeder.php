@@ -22,7 +22,9 @@ class PostSeeder extends Seeder
         $users = User::with('majors')->get();
 
         foreach ($users as $user) {
-
+            if($user->role_id==1 || $user->role_id==3){
+                 continue; // bỏ qua use admin
+            }
             // mỗi user lấy major đầu tiên (hoặc loop nếu nhiều)
             $major = $user->majors->first();
 

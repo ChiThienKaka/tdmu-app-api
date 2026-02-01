@@ -16,13 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('user_id');
             $table->text('message_content')->nullable();
-            $table->enum('message_type', [
-                'text',
-                'image',
-                'file',
-                'link'
-            ])->default('text');
-            $table->text('media_url')->nullable();
+            // $table->enum('message_type', [
+            //     'text',
+            //     'image',
+            //     'file',
+            //     'link'
+            // ])->default('text');
+            // $table->text('media_url')->nullable();
             $table->unsignedBigInteger('reply_to_message_id')->nullable();
             $table->boolean('is_pinned')->default(false);
             $table->timestamps();

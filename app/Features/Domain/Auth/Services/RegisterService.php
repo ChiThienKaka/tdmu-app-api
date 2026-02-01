@@ -4,6 +4,7 @@ namespace App\Features\Domain\Auth\Services;
 use App\Features\Infrastructure\Persistence\Auth\UserRepository;
 use App\Features\Infrastructure\Persistence\Auth\UserMajorRepository;
 use App\Features\Infrastructure\Persistence\Auth\MajorRepository;
+use App\Features\Domain\Auth\Services\RegisterGroupService;
 use App\Features\Domain\Auth\DTOs\RegisterDTO;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -13,15 +14,18 @@ class RegisterService
     protected UserRepository $userRepository;
     protected UserMajorRepository $userMajorRepository;
     protected MajorRepository $majorRepository;
+    protected RegisterGroupService $registerGroupService;
 
     public function __construct(
         UserRepository $userRepository,
         UserMajorRepository $userMajorRepository,
-        MajorRepository $majorRepository
+        MajorRepository $majorRepository,
+        RegisterGroupService $registerGroupService,
     ) {
         $this->userRepository = $userRepository;
         $this->userMajorRepository = $userMajorRepository;
         $this->majorRepository = $majorRepository;
+        $this->registerGroupService = $registerGroupService;
     }
 
     public function createStudentProfile(RegisterDTO $dto): ?User
@@ -54,6 +58,8 @@ class RegisterService
             // Tạo bảng user_major nếu có mã ngành
             if ($majorCode) {
                 $major = $this->majorRepository->findByCode($majorCode);
+                $facultyId = $major->faculty_id;
+                $majorId = $major->major_id;
                 if (!$major) {
                     throw new \Exception('Major not found: ' . $majorCode);
                 }
@@ -61,6 +67,8 @@ class RegisterService
                     'user_id' => $user->user_id,
                     'major_id' => $major->major_id
                 ]);
+                // đăng ký group khoa viện
+                $this->registerGroupService->registerGroupFaculty($user, $facultyId, $majorId);
             }
             return $user;
         }else{

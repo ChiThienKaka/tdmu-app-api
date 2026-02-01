@@ -48,5 +48,13 @@ class UserSeeder extends Seeder
                 ]);
             }
         }
+        // Tạo tài khoản admin
+        User::create([
+            'email' => "admin@gmail.com",
+            'password'=>Hash::make("123456"),
+            'full_name'=> "Đặng Hữu Danh",
+            'avatar_url'=> "https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/avatar-dep-20.jpg",
+            'role_id' => 1,
+        ]);
     }
 }

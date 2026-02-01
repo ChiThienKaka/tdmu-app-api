@@ -65,7 +65,20 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property-read \App\Models\User|null $creator
+ * @property int $group_id
+ * @property string $group_name
+ * @property string $group_type
+ * @property int|null $faculty_id
+ * @property int|null $major_id
+ * @property string|null $description
+ * @property string|null $avatar_url
+ * @property string|null $cover_image
+ * @property bool $is_auto_join
+ * @property string $privacy
+ * @property int $created_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $creator
  * @property-read \App\Models\Faculty|null $faculty
  * @property-read \App\Models\Major|null $major
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $members
@@ -75,26 +88,85 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Group newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Group newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Group query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereAvatarUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereCoverImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereFacultyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereGroupName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereGroupType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereIsAutoJoin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereMajorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group wherePrivacy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Group whereUpdatedAt($value)
  */
 	class Group extends \Eloquent {}
 }
 
 namespace App\Models{
 /**
+ * @property int $group_id
+ * @property int $user_id
+ * @property string $member_role
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Group $group
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMember newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMember newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMember query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMember whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMember whereGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMember whereMemberRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMember whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMember whereUserId($value)
  */
 	class GroupMember extends \Eloquent {}
 }
 
 namespace App\Models{
 /**
+ * @property int $message_id
+ * @property int $group_id
+ * @property int $user_id
+ * @property string|null $message_content
+ * @property string $message_type
+ * @property string|null $media_url
+ * @property int|null $reply_to_message_id
+ * @property bool $is_pinned
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Group $group
+ * @property-read GroupMessage|null $parentMessage
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, GroupMessage> $replies
+ * @property-read int|null $replies_count
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereIsPinned($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereMediaUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereMessageContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereMessageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereMessageType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereReplyToMessageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessage whereUserId($value)
  */
 	class GroupMessage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessageMedia newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessageMedia newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GroupMessageMedia query()
+ */
+	class GroupMessageMedia extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -140,6 +212,8 @@ namespace App\Models{
  * @property int|null $moderated_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Comment> $comment
+ * @property-read int|null $comment_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostMedia> $media
  * @property-read int|null $media_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostReaction> $postreactions
@@ -254,6 +328,8 @@ namespace App\Models{
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Group> $groups
+ * @property-read int|null $groups_count
  * @property-read \App\Models\UserMajor|null $pivot
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Major> $majors
  * @property-read int|null $majors_count

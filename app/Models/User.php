@@ -62,5 +62,14 @@ class User extends Authenticatable implements JWTSubject
                     ->using(UserMajor::class)
                     ->withPivot(['class_name', 'academic_year']);
     }
-
+    public function groups()
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'group_members',   // bảng trung gian
+            'user_id',
+            'group_id'
+        )->withPivot('member_role')
+        ->withTimestamps();
+    }
 }

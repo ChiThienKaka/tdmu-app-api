@@ -48,7 +48,7 @@ class CreatePostService
         $mediaRecords = [];
         // Tạo media cho bài đăng
         foreach (array_values($medias) as $index => $media) {
-            $path = $this->imageStorageService->storePostImage($media);
+            $path = $this->imageStorageService->store($media);
             $mediaRecords[] = $this->postMediaRepository->create([
                 'post_id' => $post->post_id,
                 // 'media_type' => $media->getClientMimeType(),
