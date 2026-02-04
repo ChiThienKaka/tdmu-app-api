@@ -70,4 +70,8 @@ class Group extends Model
     {
         return $this->hasMany(GroupMessage::class, 'group_id', 'group_id');
     }
+    public function groupMembers(): HasMany
+    {
+        return $this->hasMany(GroupMember::class, 'group_id', 'group_id');
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\GroupMember;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Features\Domain\Recruitment\Packages\Database\Seeders\RecruiterPackageSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,5 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GroupSeeder::class);
         $this->call(GroupMemberSeeder::class);
         $this->call(GroupMessageSeeder::class);
+        
+        //Recruiter Package Seeder
+        $this->call(RecruiterPackageSeeder::class);
     }
 }

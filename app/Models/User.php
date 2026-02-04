@@ -72,4 +72,8 @@ class User extends Authenticatable implements JWTSubject
         )->withPivot('member_role')
         ->withTimestamps();
     }
+    public function groupMembers()
+    {
+        return $this->hasMany(GroupMember::class, 'user_id', 'user_id');
+    }
 }

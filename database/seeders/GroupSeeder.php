@@ -33,12 +33,14 @@ class GroupSeeder extends Seeder
         };
         //group Ngành
         foreach($majors as $major){
+            $image = $content_images->random();
             Group::create([
                 'group_name' => "Nhóm Ngành $major->major_name",
                 'group_type' => "major",
                 'faculty_id' => $major->faculty_id,
                 'major_id' => $major->major_id,
                 'created_by' => $user_admin->user_id,
+                'cover_image' => $image,
             ]);
         }
         $arrCLB = [
@@ -57,11 +59,13 @@ class GroupSeeder extends Seeder
         ];
         //Câu lạc bộ tự do
         foreach($arrCLB as $clb){
+            $image = $content_images->random();
             Group::create([
                 'group_name' => $clb["clb_name"],
                 'group_type' => "club",
                 'description' => $clb["clb_description"],
                 'created_by' => $user_admin->user_id,
+                'cover_image' => $image,
             ]);
         }
     }
