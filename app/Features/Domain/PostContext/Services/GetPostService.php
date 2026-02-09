@@ -29,6 +29,7 @@ class GetPostService
                 'user',//realations Model Post
                 'media'
             ])
+            ->withCount('comment')
             ->where(function ($q) use ($facultyId, $majorId) {
                 $q->where('visibility', 'public')
                 ->orWhere('faculty_id', $facultyId)
