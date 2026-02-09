@@ -18,8 +18,8 @@ class GroupMemberSeeder extends Seeder
         $service = app(RegisterGroupService::class);
         $users = User::with('majors.faculty')->get();
         foreach ($users as $user) {
-            if($user->role_id==1 || $user->role_id==3){
-                 continue; // bỏ qua use admin
+            if($user->role_id !==2){
+                 continue; // bỏ qua use không phải student
             }
             // lấy ngành đầu tiên
             $major = $user->majors->first();

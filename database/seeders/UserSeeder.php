@@ -56,5 +56,13 @@ class UserSeeder extends Seeder
             'avatar_url'=> "https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/avatar-dep-20.jpg",
             'role_id' => 1,
         ]);
+        // Tạo tài khoản recruiter
+        User::create([
+            'email' => "recruiter@gmail.com",
+            'password'=>Hash::make("123456"),
+            'full_name'=> "Bùi Chí Thiện",
+            'avatar_url'=> "https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/avatar-dep-20.jpg",
+            'role_id' => 4,
+        ]);
     }
 }

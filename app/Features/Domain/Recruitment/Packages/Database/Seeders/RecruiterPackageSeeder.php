@@ -11,7 +11,7 @@ class RecruiterPackageSeeder extends Seeder
         $packages = [
             [
                 'package_name' => 'Basic',
-                'price' => 0,
+                'price' => 100000,
                 'duration_days' => 30,
                 'post_limit' => 3,
                 'featured_posts_limit' => 0,
