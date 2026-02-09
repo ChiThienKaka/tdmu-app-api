@@ -48,6 +48,12 @@ class PostSeeder extends Seeder
                     'created_at'=>now(),
                     'updated_at'=>now(),
                 ]);
+                //thêm reaction
+                $post->postreactions()->create([
+                    'user_id'=> $user->user_id,
+                    'created_at'=>now(),
+                    'updated_at'=>now(),
+                ]);
                 // tạo comment cha
                 foreach($comment_post as $comment){
                     $user_comment = $users->random();

@@ -35,13 +35,16 @@ class PostController extends Controller
     // Lấy danh sách bài Post theo user đăng nhập
     public function getPosts(Request $request)
     {
-        $cursor = $request->get('cursor');
+        $cursor = $request->get('perPage');
         $user = Auth::user();
         // Sử dụng dịch vụ để lấy bài viết
         $result = $this->getPostService->getPosts($user, 10, $cursor); 
         return response()->json(
-            StorePostResource::collection($result),
-            200
+            [
+                'data' =>  StorePostResource::collection($result),
+                'current_page' => $result->currentPage(),
+                'total' => $result->total(),
+            ]
         );
     }
 

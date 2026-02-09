@@ -16,8 +16,9 @@ class StorePostResource extends JsonResource
             'visibility' => $this->visibility,
             'status'     => $this->status,
             'views'      => $this->view_count,
-            'created_at' => $this->created_at?->toIso8601String(),
+            'created_at' => $this->created_at,//?->toIso8601String(),
             'total_comment' => $this->comment_count,
+            'total_like' => $this->postreactions_count,
             'author' => $this->whenLoaded('user', fn () => [
                 'id'     => $this->user->user_id,
                 'email'  => $this->user->email,
@@ -28,7 +29,6 @@ class StorePostResource extends JsonResource
             'media' => MediaPostResource::collection(
                 $this->media
             ),
-            // 'totalComments'=> $this->comment();
         ];
     }
 }

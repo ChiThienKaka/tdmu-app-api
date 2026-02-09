@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('user_id');
             // ENUM('like', 'love', 'haha', 'wow', 'sad', 'angry')
-            $table->string('reaction_type'); 
+            $table->string('reaction_type')->default('like'); 
             $table->timestamps();
             // Ensure a user can react only once per post
             $table->unique(['post_id', 'user_id']);

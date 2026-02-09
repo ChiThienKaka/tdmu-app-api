@@ -5,6 +5,7 @@ use App\Features\Infrastructure\Persistence\PostContext\PostRepository;
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 
 class GetPostService
 { 
@@ -17,30 +18,23 @@ class GetPostService
     }
     public function getPosts(
         User $user,
-        int $limit = 10,
-        ?string $cursor = null
-    ): Collection {
+        $perPage = 10,
+    ) {
         $user->load('majors.faculty');
         $major = $user->majors->first();
         $majorId = $major?->major_id;
         $facultyId = $major?->faculty?->faculty_id;
-
         return Post::with([
                 'user',//realations Model Post
                 'media'
             ])
-            ->withCount('comment')
+            ->withCount(['comment','postreactions'])
             ->where(function ($q) use ($facultyId, $majorId) {
                 $q->where('visibility', 'public')
                 ->orWhere('faculty_id', $facultyId)
                 ->orWhere('major_id', $majorId);
             })
-            ->when($cursor, function ($q) use ($cursor) {
-                // sử dụng cursor so sánh với thời gian tạo bài viết (created_at) để phân trang
-                $q->where('created_at', '<', $cursor);
-            })
             ->orderByDesc('created_at')
-            ->limit($limit)
-            ->get();
+            ->paginate($perPage);
     }
 }
