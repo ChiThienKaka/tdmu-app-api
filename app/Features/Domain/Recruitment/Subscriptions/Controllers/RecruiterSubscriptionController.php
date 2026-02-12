@@ -25,7 +25,7 @@ class RecruiterSubscriptionController extends Controller
     {
         $user = auth('api')->user();
         $packageId = $request->input('package_id');
-        $subscription = $this->service->subscribe($user->user_id, $packageId);
+        $subscription = $this->service->subscribe($user, $packageId);
         return response()->json([
             'message' => 'Subscription created successfully.',
              'data' => $subscription,

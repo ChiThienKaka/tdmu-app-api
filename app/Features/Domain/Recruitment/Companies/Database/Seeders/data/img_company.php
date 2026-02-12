@@ -1,0 +1,19 @@
+<?php
+return [
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-1.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-2.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-3.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-4.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-5.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-6.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-7.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-8.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-9-1.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-10.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-11.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-12.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-13.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-14.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-15.png',
+    'https://adsplus.vn/blog/wp-content/uploads/2025/08/kham-pha-logo-cac-thuong-hieu-viet-nam-noi-tieng-16.png',
+];

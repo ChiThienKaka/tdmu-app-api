@@ -7,6 +7,10 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Features\Domain\Recruitment\Packages\Database\Seeders\RecruiterPackageSeeder;
+use App\Features\Domain\JobPostings\Database\Seeders\JobCategorySeeder;
+use App\Features\Domain\Recruitment\Companies\Database\Seeders\CompanySeeder;
+use App\Features\Domain\Recruitment\Subscriptions\Database\Seeders\RecruiterSubscriptionSeeder;
+use App\Features\Domain\JobPostings\Database\Seeders\JobPostSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,5 +30,11 @@ class DatabaseSeeder extends Seeder
         
         //Recruiter Package Seeder
         $this->call(RecruiterPackageSeeder::class);
+        $this->call(JobCategorySeeder::class);
+        $this->call(CompanySeeder::class);
+        //Tạo các gói đăng ký
+         $this->call(RecruiterSubscriptionSeeder::class);
+         // Tạo thông tin bài post
+         $this->call(JobPostSeeder::class);
     }
 }

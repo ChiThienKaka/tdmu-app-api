@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('session_id', 100)->nullable();
 
             $table->timestamp('viewed_at')->useCurrent();
-
+            $table->unique(['job_id', 'user_id']);
             // ===== Indexes =====
             $table->index('job_id');
             $table->index('user_id');

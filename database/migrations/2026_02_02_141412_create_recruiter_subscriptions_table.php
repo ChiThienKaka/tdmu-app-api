@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('subscription_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('package_id');
-
+            $table->unsignedBigInteger('company_id');
             $table->date('start_date');
             $table->date('end_date');
 
@@ -38,7 +38,10 @@ return new class extends Migration
                 ->references('user_id')
                 ->on('users')
                 ->cascadeOnDelete();
-
+            $table->foreign('company_id')
+                ->references('company_id')
+                ->on('recruiter_companies')
+                ->cascadeOnDelete();
             $table->foreign('package_id')
                 ->references('package_id')
                 ->on('recruiter_packages')

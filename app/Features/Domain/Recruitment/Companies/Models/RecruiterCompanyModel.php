@@ -10,16 +10,18 @@ class RecruiterCompanyModel extends Model
     protected $primaryKey = 'company_id';
 
     protected $fillable = [
-        'name',
-        'logo',
-        'website',
-        'address',
-        'description',
-        'is_verified',
+        'company_name',   
+        'company_tax_code',
+        'company_address',
+        'company_phone',
+        'company_email',
+        'company_size',
+        'company_industry',
+        'company_url',
+        'verification_status'
     ];
 
     protected $casts = [
-        'is_verified' => 'boolean',
         'created_at'  => 'datetime',
         'updated_at'  => 'datetime',
     ];

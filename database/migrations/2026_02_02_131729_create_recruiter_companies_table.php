@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id('company_id');
             $table->unsignedBigInteger('user_id');
 
-            $table->string('company_name', 255);
+            $table->string('company_name', 255)->nullable();
             $table->string('company_tax_code', 50)->nullable();
             $table->text('company_address')->nullable();
             $table->string('company_phone', 20)->nullable();
             $table->string('company_email', 255)->nullable();
             $table->string('company_website', 255)->nullable();
             $table->text('company_logo')->nullable();
+            $table->string('company_url')->nullable();
 
             $table->enum('company_size', [
                 '1-10', '11-50', '51-200', '201-500', '500+'

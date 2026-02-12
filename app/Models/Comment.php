@@ -22,4 +22,20 @@ class Comment extends Model
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function parent()
+    {
+        return $this->belongsTo(
+            Comment::class,
+            'parent_comment_id',
+            'comment_id'
+        );
+    }
+    public function replies()
+    {
+        return $this->hasMany(
+            Comment::class,
+            'parent_comment_id',
+            'comment_id'
+        );
+    }
 }

@@ -16,9 +16,10 @@ return new class extends Migration
              $table->string('skill_name', 100)->unique();
 
             $table->enum('skill_category', [
-                'technical',
+                'general_skill',
                 'soft_skill',
                 'language',
+                'work_style',
                 'certificate'
             ])->default('technical');
 

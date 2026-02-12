@@ -39,7 +39,9 @@ class CommentController extends Controller
             [
                 'data' => CommentParentResource::collection($result),
                 'current_page' => $result->currentPage(),
+                'total_pages' => $result->lastPage(),
                 'total' => $result->total(),
+                // $result
             ],
             200
         );

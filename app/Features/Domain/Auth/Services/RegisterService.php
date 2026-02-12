@@ -67,7 +67,7 @@ class RegisterService
                     'user_id' => $user->user_id,
                     'major_id' => $major->major_id
                 ]);
-                // đăng ký group khoa viện
+                // đăng ký group khoa viện có bug
                 $this->registerGroupService->registerGroupFaculty($user, $facultyId, $majorId);
             }
             return $user;

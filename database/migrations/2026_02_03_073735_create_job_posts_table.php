@@ -16,6 +16,7 @@ return new class extends Migration
              // ===== Foreign keys =====
             $table->unsignedBigInteger('subscription_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('moderated_by')->nullable();
 
@@ -144,6 +145,10 @@ return new class extends Migration
             $table->foreign('moderated_by')
                 ->references('user_id')
                 ->on('users')
+                ->nullOnDelete();
+             $table->foreign('company_id')
+                ->references('company_id')
+                ->on('recruiter_companies')
                 ->nullOnDelete();
         });
     }

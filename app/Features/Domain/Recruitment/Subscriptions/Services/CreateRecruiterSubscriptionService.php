@@ -5,11 +5,20 @@ namespace App\Features\Domain\Recruitment\Subscriptions\Services;
 use App\Features\Domain\Recruitment\Subscriptions\Models\RecruiterSubscriptionModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
 use App\Features\Domain\Recruitment\Payments\Models\RecruiterPaymentModel;
 class CreateRecruiterSubscriptionService
 {
-    public function subscribe(int $userId, int $packageId)
+    public function subscribe(User $user, int $packageId)
     {
+        $userId = $user->user_id;
+        $user->load('company');
+        if ($user->company?->verification_status !== 'verified') {
+            throw ValidationException::withMessages([
+                'company' => 'Thông tin công ty chưa được xác minh',
+                'support' => 'Vui lòng cập nhật thông tin công ty để có thể tuyển dụng'
+            ]);
+        }
         return DB::transaction(function () use ($userId, $packageId) {
 
             // Lấy subscription mới nhất của user

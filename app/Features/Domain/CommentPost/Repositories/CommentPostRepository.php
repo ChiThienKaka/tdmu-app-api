@@ -12,7 +12,8 @@ class CommentPostRepository
     {
         $comments = $this->comment->where('post_id', $postId) 
         ->whereNull('parent_comment_id') 
-        ->with('user') 
+        ->with(['user','replies.user']) 
+        ->withCount('replies')
         ->orderBy('created_at', 'desc') 
         ->paginate($perPage);
         return $comments;

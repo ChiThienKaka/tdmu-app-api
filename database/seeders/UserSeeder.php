@@ -64,5 +64,19 @@ class UserSeeder extends Seeder
             'avatar_url'=> "https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/Image%20FP_2024/avatar-dep-20.jpg",
             'role_id' => 4,
         ]);
+        // Tạo tài khoản recruiter
+        for($i=1; $i<=100; $i++)
+        {
+            $person = $people->random();
+            $avatar = $avatars->random();
+             User::create([
+                'email' => "recruiter{$i}@gmail.com",
+                'password'=>Hash::make("123456"),
+                'full_name'=>  $person['name'],
+                'gender'=> $person['gender'] == 1 ? 'male' : 'female',
+                'avatar_url'=> $avatar,
+                'role_id' => 4,
+            ]);
+        }
     }
 }

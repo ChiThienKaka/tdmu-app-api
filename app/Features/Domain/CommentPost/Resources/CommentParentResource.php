@@ -20,7 +20,11 @@ class CommentParentResource extends JsonResource
             'parent_comment_id' => $this->parent_comment_id,
             'status' => $this->status,
             'created_at' => $this->created_at,
-
+            // không có sẽ không xuất hiện
+            'replies_count' => $this->when(
+                isset($this->replies_count),
+                $this->replies_count
+            ),
             'user' => $this->whenLoaded('user', function () {
                 return [
                     'user_id' => $this->user->user_id,
@@ -29,6 +33,9 @@ class CommentParentResource extends JsonResource
                     'email'=> $this->user->email,
                 ];
             }),
+            'replies' => CommentParentResource::collection(
+                $this->whenLoaded('replies')
+            ),
         ];
     }
 }

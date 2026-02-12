@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use App\Features\Domain\Recruitment\Companies\Models\RecruiterCompanyModel;
+use App\Features\Domain\Recruitment\Subscriptions\Models\RecruiterSubscriptionModel;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -75,5 +77,20 @@ class User extends Authenticatable implements JWTSubject
     public function groupMembers()
     {
         return $this->hasMany(GroupMember::class, 'user_id', 'user_id');
+    }
+     /**
+     * Mỗi user chỉ có 1 company
+     */
+    public function company()
+    {
+        return $this->hasOne(
+            RecruiterCompanyModel::class,
+            'user_id',
+            'user_id'
+        );
+    }
+    public function subscriptions()
+    {
+        return $this->hasMany(RecruiterSubscriptionModel::class, 'user_id', 'user_id');
     }
 }

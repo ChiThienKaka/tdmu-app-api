@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('subscription_id');
 
-            $table->string('transaction_code', 100)->unique();
+            $table->string('transaction_code', 100)->unique()->nullable();
 
             $table->string('payment_method', 50);
 
