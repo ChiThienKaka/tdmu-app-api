@@ -6,6 +6,7 @@ use App\Features\Domain\Recruitment\Companies\Models\RecruiterCompanyModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Features\Domain\Recruitment\Subscriptions\Models\RecruiterSubscriptionModel;
+use App\Features\Domain\JobApplication\Models\JobApplicationModel;
 use App\Models\User;
 
 class JobPostModel extends Model
@@ -126,7 +127,10 @@ class JobPostModel extends Model
             'user_id'
         );
     }
-
+    public function applications()
+    {
+        return $this->hasMany(JobApplicationModel::class, 'job_id', 'job_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | Query Scopes (rất hữu ích cho hệ thống tuyển dụng)

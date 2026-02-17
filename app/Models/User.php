@@ -3,6 +3,8 @@
 namespace App\Models;
 use App\Features\Domain\Recruitment\Companies\Models\RecruiterCompanyModel;
 use App\Features\Domain\Recruitment\Subscriptions\Models\RecruiterSubscriptionModel;
+use App\Features\Domain\ApplicantProfile\Models\StudentProfileModel;
+use App\Features\Domain\JobApplication\Models\JobApplicationModel;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -93,4 +95,19 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(RecruiterSubscriptionModel::class, 'user_id', 'user_id');
     }
+    
+    public function studentProfile()
+    {
+        return $this->hasOne(
+            StudentProfileModel::class,
+            'user_id',   // FK ở bảng student_profiles
+            'user_id'    // PK ở bảng users
+        );
+    }
+    // liên kết nhiều
+    public function jobApplications()
+    {
+        return $this->hasMany(JobApplicationModel::class, 'user_id', 'user_id');
+    }
+
 }

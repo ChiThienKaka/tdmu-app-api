@@ -8,7 +8,8 @@ Route::prefix('recruiter-companies')
         // Lấy danh sách công ty đã xác thực (public)
         Route::get('/', [RecruiterCompanyController::class, 'getVerifiedCompanies']);
         //PROTECTED — cần auth
-        Route::middleware('auth:api')->group(function () {
+        Route::middleware(['auth:api', 'role:4'])->group(function () {
             Route::get('/info-company', [RecruiterCompanyController::class, 'getInfoComapanyUser']);
+            Route::post('/update', [RecruiterCompanyController::class, 'updateRecruiterCompany']);
         });
     });

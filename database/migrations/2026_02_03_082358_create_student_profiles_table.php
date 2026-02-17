@@ -31,6 +31,8 @@ return new class extends Migration
             // ===== Profile content =====
             $table->text('bio')->nullable();
             $table->text('career_goals')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
 
             // ===== Job preference =====
             $table->decimal('expected_salary_min', 10, 2)->nullable();

@@ -69,6 +69,13 @@ class RegisterService
                 ]);
                 // đăng ký group khoa viện có bug
                 $this->registerGroupService->registerGroupFaculty($user, $facultyId, $majorId);
+                // đăng ký profile cho sinh viên
+                $user->studentProfile()->firstOrCreate([
+                    'student_code' => $user->student_code,
+                    'university' => "Đại học Thủ Dầu Một", // mặc định
+                    'major' => $user?->majors?->first()?->major_name ?? null,
+                    'email' => $user?->email,
+                ]);
             }
             return $user;
         }else{
@@ -82,6 +89,11 @@ class RegisterService
                 'avatar_url'=> $dto->picture,
                 'google_id'=> $dto->google_id
             ]);
+            //trên check rồi nhưng check lại luôn
+            // đăng ký profile người dùng
+            $user->studentProfile()->firstOrCreate([
+                'email' => $user?->email,
+            ]);// có rồi sẽ không tạo nữa
             return $user;
         }
 

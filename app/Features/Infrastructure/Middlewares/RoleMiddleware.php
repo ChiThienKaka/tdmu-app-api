@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, int $roleId): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
         $user = auth('api')->user();
 
@@ -16,12 +16,15 @@ class RoleMiddleware
             ], 401);
         }
 
-        if ($user->role_id !== $roleId) {
+         // ép kiểu về int để tránh mismatch string/int
+        $roles = array_map('intval', $roles);
+
+        if (!in_array($user->role_id, $roles)) {
             return response()->json([
                 'message' => 'You do not have permission to access this resource'
             ], 403);
         }
-
+        
         return $next($request);
     }
 }

@@ -19,9 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('reviewed_by')->nullable();
 
             // ===== Applicant info =====
-            $table->string('full_name', 255);
-            $table->string('email', 255);
-            $table->string('phone', 20);
+            $table->string('full_name', 255)->nullable();
+            $table->string('email', 255)->nullable();
+            $table->string('phone', 20)->nullable();
 
             $table->text('cv_url')->nullable();
             $table->text('cover_letter')->nullable();

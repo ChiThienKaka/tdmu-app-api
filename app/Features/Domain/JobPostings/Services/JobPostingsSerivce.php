@@ -20,7 +20,8 @@ class JobPostingsSerivce
                 ->join('recruiter_companies as rc', 'rc.company_id', '=', 'rs.company_id')
                 ->where('job_posts.status', 'approved')
                 ->where('rs.status', 'active')
-                ->whereDate('rs.end_date', '>=', now()->startOfDay())// ép về ngày để dễ so sánh
+                ->whereDate('rs.end_date', '>=', now()->startOfDay())// ép về ngày để dễ so sánh gói còn hạn
+                ->whereDate('job_posts.application_deadline','>=',now()->startOfDay())// ngày hết hạn tuyển dụng
                 ->orderByRaw("
                     CASE 
                         WHEN rp.support_priority = 'vip' THEN 1
