@@ -2,12 +2,18 @@
 namespace App\Features\Domain\JobPostings\Services;
 use App\Features\Domain\JobPostings\Models\JobPostModel;
 use App\Features\Domain\JobPostings\Models\JobPostSkillModel;
+use App\Models\User;
 
 class JobPostingsSerivce
 {
 
     public function __construct()
     {
+    }
+    //lấy thông tin bài post theo user nhà tuyển dụng
+    public function getStoreJobPostByUser(User $user, int $perPage = 10){
+        $jobpost = JobPostModel::where('user_id', $user->user_id)->paginate($perPage);
+        return $jobpost;
     }
     // lấy thông tin bài post 
     public function getStoreJobPost(int $perPage = 10)

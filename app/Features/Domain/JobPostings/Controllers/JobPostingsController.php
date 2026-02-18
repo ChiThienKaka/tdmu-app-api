@@ -13,6 +13,17 @@ class JobPostingsController extends Controller
     )
     {
     }
+    //Lấy thông tin bài post tuyển dụng theo user tuyển dụng
+    public function getStoreJobPostByUser(){
+        $user = auth('api')->user();
+        $result = $this->job_postings_serivce->getStoreJobPostByUser($user);
+        return response()->json([
+            'data' => ListPostResource::collection($result),
+            'current_page' => $result->currentPage(),
+            'total_pages' => $result->lastPage(),
+            'total' => $result->total(),
+        ],200);
+    }
     //get list post
     public function getStoreJobPost(){
         $user = auth('api')->user(); // hoặc $request->user()

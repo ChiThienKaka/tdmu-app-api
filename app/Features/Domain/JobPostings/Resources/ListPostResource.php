@@ -28,8 +28,8 @@ class ListPostResource extends JsonResource
             "contact_person"=> $this->contact_person ,
             "published_at"=> $this->published_at ,
             "created_at"=> $this->created_at ,
-            "company_name"=> $this->company_name ,
-            "company_url"=> $this->company_url ,
+            "company_name"=> $this->whenNotNull($this->company_name),
+            "company_url"=> $this->whenNotNull($this->company_url),
         ];
     }
 }
