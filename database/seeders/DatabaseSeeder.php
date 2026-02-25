@@ -11,6 +11,8 @@ use App\Features\Domain\JobPostings\Database\Seeders\JobCategorySeeder;
 use App\Features\Domain\Recruitment\Companies\Database\Seeders\CompanySeeder;
 use App\Features\Domain\Recruitment\Subscriptions\Database\Seeders\RecruiterSubscriptionSeeder;
 use App\Features\Domain\JobPostings\Database\Seeders\JobPostSeeder;
+use App\Features\Domain\ChatBox\Database\Seeders\ChatBoxSeeder;
+use App\Features\Domain\ChatBox\Database\Seeders\EmbeddingDataSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,10 +25,10 @@ class DatabaseSeeder extends Seeder
         $this->call(FacultySeeder::class);
         $this->call(MajorSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(PostSeeder::class);
-        $this->call(GroupSeeder::class);
-        $this->call(GroupMemberSeeder::class);
-        $this->call(GroupMessageSeeder::class);
+        // $this->call(PostSeeder::class);
+        // $this->call(GroupSeeder::class);
+        // $this->call(GroupMemberSeeder::class);
+        // $this->call(GroupMessageSeeder::class);
         
         //Recruiter Package Seeder
         $this->call(RecruiterPackageSeeder::class);
@@ -36,5 +38,9 @@ class DatabaseSeeder extends Seeder
          $this->call(RecruiterSubscriptionSeeder::class);
          // Tạo thông tin bài post
          $this->call(JobPostSeeder::class);
+
+         //chatbox ai
+         $this->call(ChatBoxSeeder::class);
+         $this->call(EmbeddingDataSeeder::class);
     }
 }

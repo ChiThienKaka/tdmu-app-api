@@ -15,6 +15,7 @@ class RecruiterSubscriptionModel extends Model
     protected $fillable = [
         'user_id',
         'package_id',
+        'company_id',
         'start_date',
         'end_date',
         'status',

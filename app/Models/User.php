@@ -5,6 +5,7 @@ use App\Features\Domain\Recruitment\Companies\Models\RecruiterCompanyModel;
 use App\Features\Domain\Recruitment\Subscriptions\Models\RecruiterSubscriptionModel;
 use App\Features\Domain\ApplicantProfile\Models\StudentProfileModel;
 use App\Features\Domain\JobApplication\Models\JobApplicationModel;
+use App\Features\Domain\ChatBox\Models\MessageChatboxModel;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -109,5 +110,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(JobApplicationModel::class, 'user_id', 'user_id');
     }
-
+    public function messageChatboxs()
+    {
+        return $this->hasMany(MessageChatboxModel::class, 'user_id', 'user_id');
+    }
 }

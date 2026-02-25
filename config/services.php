@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'embedding' => [
+        'url' => env('EMBEDDING_URL', 'http://127.0.0.1:8001'),
+    ],
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+    ],
 ];

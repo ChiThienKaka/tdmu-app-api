@@ -13,13 +13,14 @@ class CreateRecruiterSubscriptionService
     {
         $userId = $user->user_id;
         $user->load('company');
-        if ($user->company?->verification_status !== 'verified') {
+        $company = $user->company;
+        if (!$company || $user->company?->verification_status !== 'verified') {
             throw ValidationException::withMessages([
                 'company' => 'Thông tin công ty chưa được xác minh',
                 'support' => 'Vui lòng cập nhật thông tin công ty để có thể tuyển dụng'
             ]);
         }
-        return DB::transaction(function () use ($userId, $packageId) {
+        return DB::transaction(function () use ($company,$userId, $packageId) {
 
             // Lấy subscription mới nhất của user
             $current = RecruiterSubscriptionModel::where('user_id', $userId)
@@ -82,6 +83,7 @@ class CreateRecruiterSubscriptionService
                 $newSubscription = RecruiterSubscriptionModel::create([
                     'user_id' => $userId,
                     'package_id' => $packageId,
+                    'company_id' => $company->company_id,
                     'start_date' => now(),
                     'end_date' => now()->addMonth(),
                     'status' => 'pending', // chờ thanh toán
@@ -112,13 +114,13 @@ class CreateRecruiterSubscriptionService
                     'subscription' => $newSubscription
                 ];
             }
-
             /**
              * TRƯỜNG HỢP 1: CHƯA CÓ SUBSCRIPTION → ĐĂNG KÝ MỚI
              */
             $subscription = RecruiterSubscriptionModel::create([
                 'user_id' => $userId,
                 'package_id' => $packageId,
+                'company_id' => $company->company_id,// thêm thông tin công ty
                 'start_date' => now(),
                 'end_date' => now()->addMonth(),
                 'status' => 'pending',

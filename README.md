@@ -101,3 +101,25 @@ php artisan config:publish cors
 https://dienmaycholon.com/kinh-nghiem-mua-sam/avatar-dep
 https://maubanhkem.com/anh-hoc-tap-chill/
 
+## setup Vector cho postgreSQL
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
+vào visualstudio installer tải
+Desktop development with C++
+✔ MSVC v143 - VS 2022 C++ x64/x86 build tools
+✔ Windows SDK (bất kỳ version nào)
+tìm x64 trong key windows
+x64 Native Tools Command Prompt for VS 2022
+Windows
+Ensure C++ support in Visual Studio is installed and run x64 Native Tools Command Prompt for VS [version] as administrator. Then use nmake to build:
+set "PGROOT=C:\Program Files\PostgreSQL\16"
+cd %TEMP%
+git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
+cd pgvector
+nmake /F Makefile.win
+nmake /F Makefile.win install
+vào PostgreSQl chạy lệnh: CREATE EXTENSION vector;
+### test SELECT '[1,2,3]'::vector;
+
+## sửa ssl
+curl.cainfo = "C:\laragon\etc\ssl\cacert.pem"
+openssl.cafile="C:\laragon\etc\ssl\cacert.pem"

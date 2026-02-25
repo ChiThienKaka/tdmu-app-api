@@ -10,5 +10,6 @@ return [
     App\Features\Domain\Recruitment\Payments\Providers\RecruiterPaymentServiceProvider::class,
     App\Features\Domain\JobPostings\Providers\JobPostingsServiceProvider::class,
     App\Features\Domain\ApplicantProfile\Providers\StudentProfileServiceProvider::class,
-    App\Features\Domain\JobApplication\Providers\JobApplicationServiceProvider::class
+    App\Features\Domain\JobApplication\Providers\JobApplicationServiceProvider::class,
+    App\Features\Domain\ChatBox\Providers\ChatBoxServiceProvider::class,
 ];
