@@ -6,3 +6,4 @@ Route::prefix('auth')->group(base_path('routes/Auth/AuthRoute.php'));
 Route::prefix('post-context')->group(base_path('routes/PostContext/PostContextRoute.php'));
 Route::prefix('post-comment')->group(base_path('routes/CommentPost/CommentPostRoute.php'));
 Route::prefix('group-student')->group(base_path('routes/GroupStudent/GroupStudentRoute.php'));
+Route::prefix('user-chat')->group(base_path('routes/UserChat/UserChatRoute.php'));

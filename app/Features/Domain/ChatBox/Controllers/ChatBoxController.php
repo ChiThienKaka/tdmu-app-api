@@ -55,7 +55,7 @@ class ChatBoxController extends Controller {
             'x-goog-api-key' => $apiKey,
             'Content-Type' => 'application/json',
         ])->post(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent",
+            "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent",
             [
                 "contents" => [
                     [

@@ -12,4 +12,7 @@ class GroupStudentService
     public function getGroupStudentsByUser($user){
         return $this->groupStudentRepository->getGroupStudentsByUser($user);
     }
+    public function getUsersByGroup($group_id){
+        return $this->groupStudentRepository->getUsersByGroup($group_id);
+    }
 }

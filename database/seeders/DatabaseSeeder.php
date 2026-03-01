@@ -25,10 +25,10 @@ class DatabaseSeeder extends Seeder
         $this->call(FacultySeeder::class);
         $this->call(MajorSeeder::class);
         $this->call(UserSeeder::class);
-        // $this->call(PostSeeder::class);
-        // $this->call(GroupSeeder::class);
-        // $this->call(GroupMemberSeeder::class);
-        // $this->call(GroupMessageSeeder::class);
+        $this->call(PostSeeder::class);
+        $this->call(GroupSeeder::class);
+        $this->call(GroupMemberSeeder::class);
+        $this->call(GroupMessageSeeder::class);
         
         //Recruiter Package Seeder
         $this->call(RecruiterPackageSeeder::class);
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
          $this->call(JobPostSeeder::class);
 
          //chatbox ai
-         $this->call(ChatBoxSeeder::class);
-         $this->call(EmbeddingDataSeeder::class);
+        //  $this->call(ChatBoxSeeder::class);
+        //  $this->call(EmbeddingDataSeeder::class);
     }
 }
