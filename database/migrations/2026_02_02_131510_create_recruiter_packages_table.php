@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('featured_posts_limit')->default(0);
             $table->integer('refresh_limit')->default(0);
 
-            $table->enum('support_priority', ['standard', 'priority', 'vip'])
+            $table->enum('support_priority', ['standard', 'priority', 'vip', 'premium'])
                   ->default('standard');
 
             $table->json('features')->nullable();
