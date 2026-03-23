@@ -115,7 +115,7 @@ class AuthController extends Controller
                 'message' => 'Làm mới token thất bại',
             ], 401);
         }
-
+        
         return response()->json($result, 200);
     }
 }

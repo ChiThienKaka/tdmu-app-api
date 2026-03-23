@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Features\Domain\Recruitment\Companies\Models;
-
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class RecruiterCompanyModel extends Model
@@ -25,4 +25,9 @@ class RecruiterCompanyModel extends Model
         'created_at'  => 'datetime',
         'updated_at'  => 'datetime',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
 }
