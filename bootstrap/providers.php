@@ -13,4 +13,5 @@ return [
     App\Features\Domain\JobApplication\Providers\JobApplicationServiceProvider::class,
     App\Features\Domain\ChatBox\Providers\ChatBoxServiceProvider::class,
     App\Features\Domain\Admin\Providers\AdminServiceProvider::class,
+    App\Features\Domain\RecruiterDashboard\Providers\RecruiterDashboardServiceProvider::class,
 ];
