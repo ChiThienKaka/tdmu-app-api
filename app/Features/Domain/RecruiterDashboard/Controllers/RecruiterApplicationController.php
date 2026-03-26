@@ -30,7 +30,7 @@ class RecruiterApplicationController
         $result = $this->applicationService->listByRecruiter(
             $user->user_id,
             $validated,
-            $validated['per_page'] ?? 15
+            $validated['per_page'] ?? 10
         );
 
         return response()->json([

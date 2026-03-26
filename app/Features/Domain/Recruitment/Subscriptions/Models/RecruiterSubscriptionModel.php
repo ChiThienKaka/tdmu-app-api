@@ -6,6 +6,7 @@ namespace App\Features\Domain\Recruitment\Subscriptions\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Features\Domain\Recruitment\Packages\Models\RecruiterPackageModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
 
 class RecruiterSubscriptionModel extends Model
 {
@@ -38,6 +39,15 @@ class RecruiterSubscriptionModel extends Model
             RecruiterPackageModel::class,
             'package_id',
             'package_id'
+        );
+    }
+    // ✅ THÊM RELATION NÀY
+    public function recruiter(): BelongsTo
+    {
+        return $this->belongsTo(
+            User::class,
+            'user_id',
+            'user_id'
         );
     }
 }

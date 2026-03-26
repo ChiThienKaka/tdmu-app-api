@@ -31,6 +31,7 @@ Route::prefix('recruiter')->middleware(['auth:api', 'role:4'])->group(function (
     Route::prefix('application')->group(function () {
         Route::get('/',           [RecruiterApplicationController::class, 'index']);
         Route::get('/{id}',       [RecruiterApplicationController::class, 'show']);
+        Route::get('/by-job-post/{id}',       [RecruiterApplicationController::class, 'byJobPost']);
         Route::patch('/{id}/status',    [RecruiterApplicationController::class, 'updateStatus']);
         Route::post('/{id}/interview',  [RecruiterApplicationController::class, 'scheduleInterview']);
     });

@@ -22,7 +22,7 @@ class StoreJobPostRequest extends FormRequest
             'salary_min' => ['sometimes', 'numeric', 'min:0'],
             'salary_max' => ['sometimes', 'numeric', 'min:0', 'gte:salary_min'],
             'salary_type' => ['sometimes', 'string', 'in:fixed,negotiable,range'],
-            'job_type' => ['required', 'string', 'in:full_time,part_time,contract,internship,freelance'],
+            'job_type' => ['string', 'in:full_time,part_time,contract,internship,freelance'],
             'experience_level' => ['sometimes', 'string'],
             'education_level' => ['sometimes', 'string'],
             'number_of_positions' => ['sometimes', 'integer', 'min:1'],

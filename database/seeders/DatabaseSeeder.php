@@ -13,6 +13,7 @@ use App\Features\Domain\Recruitment\Subscriptions\Database\Seeders\RecruiterSubs
 use App\Features\Domain\JobPostings\Database\Seeders\JobPostSeeder;
 use App\Features\Domain\ChatBox\Database\Seeders\ChatBoxSeeder;
 use App\Features\Domain\ChatBox\Database\Seeders\EmbeddingDataSeeder;
+use App\Features\Domain\RecruiterDashboard\Database\Seeders\JobApplicationSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -42,5 +43,9 @@ class DatabaseSeeder extends Seeder
          //chatbox ai
         //  $this->call(ChatBoxSeeder::class);
         //  $this->call(EmbeddingDataSeeder::class);
+
+
+        //Data mẫu user upload cv 
+        $this->call(JobApplicationSeeder::class);
     }
 }

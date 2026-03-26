@@ -11,12 +11,12 @@ class RecruiterApplicationService
     /**
      * Lấy tất cả ứng viên của nhà tuyển dụng (qua các bài đăng)
      */
-    public function listByRecruiter(int $userId, array $filters = [], int $perPage = 15)
+    public function listByRecruiter(int $userId, array $filters = [], int $perPage = 10)
     {
         $query = JobApplicationModel::whereHas('jobpost', function ($q) use ($userId) {
                 $q->where('user_id', $userId);
             })
-            ->with(['jobpost:job_id,job_title', 'applicant:user_id,name,email'])
+            ->with(['jobpost:job_id,job_title', 'applicant:user_id,full_name,email'])
             ->orderByDesc('applied_at');
 
         if (!empty($filters['status'])) {
@@ -33,16 +33,16 @@ class RecruiterApplicationService
     /**
      * Ứng viên theo bài đăng cụ thể (phải thuộc về NTD)
      */
-    public function listByJobPost(int $userId, int $jobId, int $perPage = 15)
+    public function listByJobPost(int $userId, int $job_id, int $perPage = 15)
     {
         // Xác nhận bài đăng thuộc NTD
-        $job = JobPostModel::where('user_id', $userId)->find($jobId);
+        $job = JobPostModel::where('user_id', $userId)->find($job_id);
         if (!$job) {
             return null;
         }
 
-        return JobApplicationModel::where('job_id', $jobId)
-            ->with(['applicant:user_id,name,email', 'timelines'])
+        return JobApplicationModel::where('job_id', $job_id)
+            ->with(['applicant:user_id,full_name,email', 'timelines'])
             ->orderByDesc('applied_at')
             ->paginate($perPage);
     }
@@ -55,28 +55,33 @@ class RecruiterApplicationService
         return JobApplicationModel::whereHas('jobpost', function ($q) use ($userId) {
                 $q->where('user_id', $userId);
             })
-            ->with(['jobpost:job_id,job_title', 'applicant:user_id,name,email', 'timelines'])
+            ->with(['jobpost:job_id,job_title', 'applicant:user_id,full_name,email', 'timelines'])
             ->find($applicationId);
     }
 
     /**
      * Cập nhật trạng thái ứng viên + ghi timeline
      */
-    public function updateStatus(int $userId, int $applicationId, string $status, array $extra = []): ?JobApplicationModel
+   public function updateStatus(int $userId, int $applicationId, string $newStatus, array $extra = []): ?JobApplicationModel
     {
         $application = $this->getDetail($userId, $applicationId);
         if (!$application) {
             return null;
         }
 
-        $updateData = array_merge(['status' => $status], $extra);
+        // ✅ Lấy trạng thái cũ TRƯỚC khi update
+        $oldStatus = $application->status;
+
+        // ✅ Update status mới
+        $updateData = array_merge(['status' => $newStatus], $extra);
         $application->update($updateData);
 
-        // Ghi lịch sử sang ApplicationTimeline nếu model tồn tại
+        // ✅ Ghi timeline
         if (class_exists(ApplicationTimelineModel::class)) {
             ApplicationTimelineModel::create([
                 'application_id' => $applicationId,
-                'status'         => $status,
+                'old_status'     => $oldStatus,     // chuẩn
+                'new_status'     => $newStatus,     // chuẩn
                 'note'           => $extra['note'] ?? null,
                 'changed_by'     => $userId,
                 'changed_at'     => now(),

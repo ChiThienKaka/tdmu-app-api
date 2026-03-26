@@ -3,7 +3,9 @@
 namespace App\Features\Domain\RecruiterDashboard\Services;
 
 use App\Features\Domain\JobPostings\Models\JobPostModel;
+use App\Features\Domain\Recruitment\Subscriptions\Models\RecruiterSubscriptionModel;
 use Illuminate\Support\Str;
+use App\Features\Domain\Recruitment\Companies\Models\RecruiterCompanyModel;
 
 class RecruiterJobPostService
 {
@@ -41,10 +43,31 @@ class RecruiterJobPostService
      */
     public function create(int $userId, array $data): JobPostModel
     {
-        $data['user_id'] = $userId;
-        $data['status'] = 'pending'; // chờ admin duyệt
-        $data['slug'] = $data['slug'] ?? Str::slug($data['job_title']) . '-' . time();
+        //Cái này dính bug khá nhiều chưa mới chỉ chặn active chưa chặn quyền đăng tối đa
+        // check subscription
+        $subscription = RecruiterSubscriptionModel::where('user_id', $userId)
+            ->where('status', 'active')
+            ->whereDate('end_date', '>=', now())
+            ->first();
 
+        if (!$subscription) {
+            throw new \RuntimeException('Bạn không có gói đăng tin đang hoạt động.');
+        }
+
+        // ✅ lấy company
+        $company = RecruiterCompanyModel::where('user_id', $userId)->first();
+
+        if (!$company) {
+            throw new \RuntimeException('Bạn chưa tạo công ty.');
+        }
+
+        $data['user_id'] = $userId;
+        $data['company_id'] = $company->company_id; // ✅ FIX CHÍNH
+        $data['subscription_id'] = $subscription->subscription_id;
+
+        $data['status'] = 'pending';
+        $data['slug'] = $data['slug'] ?? Str::slug($data['job_title']) . '-' . time();
+        // dd($data);
         return JobPostModel::create($data);
     }
 

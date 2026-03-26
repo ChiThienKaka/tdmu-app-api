@@ -29,10 +29,16 @@ class JobPostSeeder extends Seeder
         $jobSkills = JobSkillModel::pluck('skill_id');
         $categoryParent = JobCategoryModel::where('parent_id',null)->get();
         $subscription_recruiters = RecruiterSubscriptionModel::get();
+        $subscriptions = $subscription_recruiters->shuffle();
         // tạo post theo categroy
         foreach($categoryParent as $category){
             foreach($datas[$category->category_slug] as $post){
-                $subscription = $subscription_recruiters->random();
+                // $subscription = $subscription_recruiters->random();
+                if ($subscriptions->isEmpty()) {
+                    $subscriptions = $subscription_recruiters->shuffle();
+                }
+                $subscription = $subscriptions->pop(); // không trùng
+                
                 $jobpost = JobPostModel::create([
                     'subscription_id' => $subscription->subscription_id,
                     'user_id' => $subscription->user_id,

@@ -64,6 +64,8 @@ class JobPostModel extends Model
 
         'last_refreshed_at',
         'published_at',
+
+        'company_id' // id công ty 
     ];
 
     protected $casts = [
