@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class VnPayService
 {
-    public function createPayment($subscription_id)
+    public function createPayment($subscription_id, $routehome)
     {
         $subscription_payment = RecruiterPaymentModel::where('subscription_id', $subscription_id)
             ->where('payment_status', 'pending')
@@ -18,7 +18,7 @@ class VnPayService
         $vnp_TmnCode = config('vnpay.tmn_code');
         $vnp_HashSecret = config('vnpay.hash_secret');
         $vnp_Url = config('vnpay.url');
-        $vnp_ReturnUrl = config('vnpay.return_url');
+        $vnp_ReturnUrl = $routehome ?? config('vnpay.return_url');
 
         // tạo bảng Payment transaction cho mỗi lần user bấm thanh toán
         $payment_transaction = PaymentTransactionModel::create([

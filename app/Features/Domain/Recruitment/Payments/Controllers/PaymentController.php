@@ -20,7 +20,8 @@ class PaymentController extends Controller
     {
         $user = auth('api')->user();
         $subsriptionId = $request->input('subscription_id');
-        $payment = $this->vnPayService->createPayment($subsriptionId);
+        $routehome = $request->input('route_home');
+        $payment = $this->vnPayService->createPayment($subsriptionId, $routehome);
         return response()->json([
             'payment_url' => $payment,
             'user'      => $user,

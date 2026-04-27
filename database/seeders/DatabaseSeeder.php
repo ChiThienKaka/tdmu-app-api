@@ -40,9 +40,9 @@ class DatabaseSeeder extends Seeder
          // Tạo thông tin bài post
          $this->call(JobPostSeeder::class);
 
-         //chatbox ai
-        //  $this->call(ChatBoxSeeder::class);
-        //  $this->call(EmbeddingDataSeeder::class);
+        //  chatbox ai
+         $this->call(ChatBoxSeeder::class);
+         $this->call(EmbeddingDataSeeder::class);
 
 
         //Data mẫu user upload cv 
