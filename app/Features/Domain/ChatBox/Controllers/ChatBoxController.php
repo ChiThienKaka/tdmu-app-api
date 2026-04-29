@@ -82,4 +82,10 @@ class ChatBoxController extends Controller {
             'answer' => $text
         ],200);
     }
+
+    public function getgetRecentMessages(){
+        $user = auth('api')->user();
+        $data = $this->message_chatbox_repository->getRecentMessages($user);
+        return response()->json($data,200);
+    }
 }

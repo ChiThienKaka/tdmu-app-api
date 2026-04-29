@@ -28,7 +28,8 @@ class MessageChatboxRepository
             ->latest()
             ->take($limit)
             ->get()
-            ->reverse()
+            ->sortBy('id') // hoặc created_at
+            // ->reverse() cái này không hoạt động
             ->values();
     }
     /**
