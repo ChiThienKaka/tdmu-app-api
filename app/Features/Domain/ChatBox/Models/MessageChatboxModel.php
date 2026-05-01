@@ -16,8 +16,13 @@ class MessageChatboxModel extends Model
         'user_id',
         'role',
         'content',
+        'job_ids',
+        'jobs',
     ];
-
+    protected $casts = [
+        'job_ids' => 'array',
+        'jobs' => 'array',
+    ];
     /**
      * Vì users dùng user_id làm primary key
      */

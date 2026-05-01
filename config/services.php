@@ -41,4 +41,7 @@ return [
     'gemini' => [
         'api_key' => env('GEMINI_API_KEY'),
     ],
+    'groq' => [
+        'api_key_groq' => env('GROQ_API_KEY'),
+    ],
 ];

@@ -123,3 +123,5 @@ vào PostgreSQl chạy lệnh: CREATE EXTENSION vector;
 ## sửa ssl
 curl.cainfo = "C:\laragon\etc\ssl\cacert.pem"
 openssl.cafile="C:\laragon\etc\ssl\cacert.pem"
+
+php artisan serve --host=0.0.0.0 --port=8000

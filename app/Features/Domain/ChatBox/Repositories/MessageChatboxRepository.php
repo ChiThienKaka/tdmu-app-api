@@ -2,6 +2,7 @@
 
 namespace App\Features\Domain\ChatBox\Repositories;
 
+use App\Features\Domain\ChatBox\Events\CreateMessageChatboxEvent;
 use App\Features\Domain\ChatBox\Models\MessageChatboxModel;
 use App\Models\User;
 use Illuminate\Support\Collection;
@@ -11,12 +12,18 @@ class MessageChatboxRepository
     /**
      * Lưu message mới
      */
-    public function create(User $user, string $role, string $content): MessageChatboxModel
+    public function create(User $user, string $role, string $content, array $job_ids = [], array $jobs = []): MessageChatboxModel
     {
-        return $user->messageChatboxs()->create([
+        $message = $user->messageChatboxs()->create([
             'role'    => $role,
             'content' => $content,
+            'job_ids' => $job_ids,
+            'jobs' => $jobs ?? [],
         ]);
+
+        // event(new CreateMessageChatboxEvent($message));
+
+        return $message;
     }
 
     /**

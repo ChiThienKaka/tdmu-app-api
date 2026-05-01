@@ -46,26 +46,29 @@ class GroupSeeder extends Seeder
         $arrCLB = [
            [
              "clb_name" => "CLB trực thuộc Đoàn - Hội trường",
-             "clb_description" => "CLB Kỹ năng, Đội Công tác xã hội, Đội Tình nguyện, Câu lạc bộ Truyền thông."
+             "clb_description" => "CLB Kỹ năng, Đội Công tác xã hội, Đội Tình nguyện, Câu lạc bộ Truyền thông.",
+             "image" => "https://tuoitre.tdmu.edu.vn/img/ckeditor/images/31a61578b4f741a918e6.jpg",
            ],
            [
              "clb_name" => "CLB học thuật và kỹ năng",
-             "clb_description" => "CLB Những nhà sáng lập (TFC), các CLB tiếng Anh, CLB Tin học, CLB Nghiên cứu khoa học."
+             "clb_description" => "CLB Những nhà sáng lập (TFC), các CLB tiếng Anh, CLB Tin học, CLB Nghiên cứu khoa học.",
+             "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRocRA92LwyN7Mww_-POb_VwIU3VNpF2OFntw&s",
            ],
            [
              "clb_name" => "CLB Văn nghệ - Thể thao",
-             "clb_description" => "Các CLB hát, múa, guitar, các đội bóng đá, bóng chuyền, võ thuật. "
+             "clb_description" => "Các CLB hát, múa, guitar, các đội bóng đá, bóng chuyền, võ thuật. ",
+             "image" => "https://doanthanhnien.huce.edu.vn/images57/Images/330291213_3284126911899371_5921772652574617364_n.jpg",
            ]
         ];
         //Câu lạc bộ tự do
         foreach($arrCLB as $clb){
-            $image = $content_images->random();
+            // $image = $content_images->random();
             Group::create([
                 'group_name' => $clb["clb_name"],
                 'group_type' => "club",
                 'description' => $clb["clb_description"],
                 'created_by' => $user_admin->user_id,
-                'cover_image' => $image,
+                'cover_image' => $clb["image"],
             ]);
         }
     }
